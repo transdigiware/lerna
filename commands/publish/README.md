@@ -54,7 +54,9 @@ This is useful when a previous `lerna publish` failed to publish all packages to
 - [`--graph-type <all|dependencies>`](#--graph-type-alldependencies)
 - [`--ignore-scripts`](#--ignore-scripts)
 - [`--ignore-prepublish`](#--ignore-prepublish)
+- [`--legacy-auth`](#--legacy-auth)
 - [`--no-git-reset`](#--no-git-reset)
+- [`--no-granular-pathspec`](#--no-granular-pathspec)
 - [`--no-verify-access`](#--no-verify-access)
 - [`--otp`](#--otp)
 - [`--preid`](#--preid)
@@ -160,6 +162,14 @@ When passed, this flag will disable running [lifecycle scripts](#lifecycle-scrip
 
 When passed, this flag will disable running [deprecated](https://docs.npmjs.com/misc/scripts#prepublish-and-prepare) [`prepublish` scripts](#lifecycle-scripts) during `lerna publish`.
 
+### `--legacy-auth`
+
+When publishing packages that require authentication but you are working with an internally hosted NPM Registry that only uses the legacy Base64 version of username:password. This is the same as the NPM publish `_auth` flag.
+
+```sh
+lerna publish --legacy-auth aGk6bW9t
+```
+
 ### `--no-git-reset`
 
 By default, `lerna publish` ensures any changes to the working tree have been reset.
@@ -169,6 +179,23 @@ To avoid this, pass `--no-git-reset`. This can be especially useful when used as
 ```sh
 lerna publish --no-git-reset
 ```
+
+### `--no-granular-pathspec`
+
+By default, `lerna publish` will attempt (if enabled) to `git checkout` _only_ the leaf package manifests that are temporarily modified during the publishing process. This yields the equivalent of `git checkout -- packages/*/package.json`, but tailored to _exactly_ what changed.
+
+If you **know** you need different behavior, you'll understand: Pass `--no-granular-pathspec` to make the git command _literally_ `git checkout -- .`. By opting into this [pathspec](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddefpathspecapathspec), you must have all intentionally unversioned content properly ignored.
+
+This option makes the most sense configured in lerna.json, as you really don't want to mess it up:
+
+```json
+{
+  "version": "independent",
+  "granularPathspec": false
+}
+```
+
+The root-level configuration is intentional, as this also covers the [identically-named option in `lerna version`](https://github.com/lerna/lerna/tree/master/commands/version#--no-granular-pathspec).
 
 ### `--no-verify-access`
 

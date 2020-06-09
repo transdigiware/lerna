@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.22.1](https://github.com/lerna/lerna/compare/v3.22.0...v3.22.1) (2020-06-09)
+
+
+### Bug Fixes
+
+* Move [#2445](https://github.com/lerna/lerna/issues/2445) behind `--no-granular-pathspec` option ([b3da937](https://github.com/lerna/lerna/commit/b3da937a61199ac71ed44b184ed36ff131237165)), closes [#2598](https://github.com/lerna/lerna/issues/2598)
+
+
+
+
+
+# [3.22.0](https://github.com/lerna/lerna/compare/v3.21.0...v3.22.0) (2020-05-24)
+
+
+### Bug Fixes
+
+* **conventional-commits:**  Support modern config builder functions ([#2546](https://github.com/lerna/lerna/issues/2546)) ([7ffb297](https://github.com/lerna/lerna/commit/7ffb297b5cab910f58153cd9decd1f3b58b0c4ed)), closes [#2138](https://github.com/lerna/lerna/issues/2138)
+* **create:** Use correct variable name in generated CLI output ([#2547](https://github.com/lerna/lerna/issues/2547)) ([a1fd622](https://github.com/lerna/lerna/commit/a1fd622a55e3dbbf47a6a166c01fe17636cd0a76))
+* **deps:** upgrade octokit/enterprise-rest to v6 ([#2464](https://github.com/lerna/lerna/issues/2464)) ([b44ea75](https://github.com/lerna/lerna/commit/b44ea753fb9405432bc9fea84726fae365bf4cd8))
+* **import:** Support non-ASCII characters in file paths ([#2441](https://github.com/lerna/lerna/issues/2441)) ([c74ffa4](https://github.com/lerna/lerna/commit/c74ffa4b31503ab8cd537ac2a9c9c15494f81a0c))
+* **publish:** Avoid errors when files are ignored by git ([#2445](https://github.com/lerna/lerna/issues/2445)) ([448f2ae](https://github.com/lerna/lerna/commit/448f2aee7258febc15c131c1128688326a52778f)), closes [#2151](https://github.com/lerna/lerna/issues/2151)
+* **publish:** Avoid exception when publishing 1st version ([#2485](https://github.com/lerna/lerna/issues/2485)) ([5d80285](https://github.com/lerna/lerna/commit/5d802851d156e20e1bac4107e68b7280e078a51b))
+* **publish:** Support `--tag-version-prefix` in `--canary` mode ([#2435](https://github.com/lerna/lerna/issues/2435)) ([611c38e](https://github.com/lerna/lerna/commit/611c38edb07d18fc92a20ba44edab715519a203d))
+* **version:** `--atomic` fallback when `GIT_REDIRECT_STDERR` is enabled ([#2467](https://github.com/lerna/lerna/issues/2467)) ([c255d12](https://github.com/lerna/lerna/commit/c255d1242e3c21f432fac1e484a4e71ad50ed71f))
+
+
+### Features
+
+* **conventional-commits:** Preserve major version zero on breaking changes ([#2486](https://github.com/lerna/lerna/issues/2486)) ([6126e6c](https://github.com/lerna/lerna/commit/6126e6c6cb52405d7ff98d3b4017bf39dcdfa965))
+* **version:** add `--force-git-tag` option ([#2594](https://github.com/lerna/lerna/issues/2594)) ([00738e9](https://github.com/lerna/lerna/commit/00738e9ab2a9f3b5656419205bd7ddb1669e4193))
+
+
+
+
+
+# [3.21.0](https://github.com/lerna/lerna/compare/v3.20.2...v3.21.0) (2020-05-13)
+
+
+### Bug Fixes
+
+* **publish:** Canary releases without previous tags should not explode ([c9eb590](https://github.com/lerna/lerna/commit/c9eb590bf867889a188598322bb4552db7a34dfc))
+
+
+### Features
+
+* **project:** Add `getPackagesSync()` export ([068bdd7](https://github.com/lerna/lerna/commit/068bdd75683ca9687a420523e4ba007bd8b3b220))
+* **version:** Ignore private packages completely with `--no-private` ([a9b9f97](https://github.com/lerna/lerna/commit/a9b9f97457e4e4b0cac7f4ce562458d921a1f9be))
+
+
+
+
+
+## [3.20.2](https://github.com/lerna/lerna/compare/v3.20.1...v3.20.2) (2020-01-02)
+
+
+### Bug Fixes
+
+* **version:** Loosen `--atomic` fallback to catch incompatible CLI versions ([6f0e2bb](https://github.com/lerna/lerna/commit/6f0e2bb1b033b0579910cedcf0be84f1474c1580)), closes [#2400](https://github.com/lerna/lerna/issues/2400)
+
+
+
+
+
+## [3.20.1](https://github.com/lerna/lerna/compare/v3.20.0...v3.20.1) (2019-12-29)
+
+
+### Bug Fixes
+
+* **version:** Support git clients that do not support `git push --atomic` ([2b9b210](https://github.com/lerna/lerna/commit/2b9b210c0b6ac69853ffb01f0dbac9109ab419c5))
+
+
+
+
+
+# [3.20.0](https://github.com/lerna/lerna/compare/v3.19.0...v3.20.0) (2019-12-27)
+
+
+### Bug Fixes
+
+* **collect-dependents:** Avoid skipping dependents of cyclic dependencies ([#2380](https://github.com/lerna/lerna/issues/2380)) ([bd19a34](https://github.com/lerna/lerna/commit/bd19a34debf3344e94386b4ffd4b3fe87efb4641))
+* **version:** pass `--atomic` to `git push` ([#2393](https://github.com/lerna/lerna/issues/2393)) ([ec0f92a](https://github.com/lerna/lerna/commit/ec0f92aac03cea27168d3982601f40b863943a3c)), closes [#2392](https://github.com/lerna/lerna/issues/2392)
+
+
+### Features
+
+* **cli:** Add new `info` command to output information about local environment ([#2106](https://github.com/lerna/lerna/issues/2106)) ([7abfe43](https://github.com/lerna/lerna/commit/7abfe43426197fbc7f18c44b0c994324609fc769))
+* **publish:** Add `--legacy-auth` flag ([#2347](https://github.com/lerna/lerna/issues/2347)) ([0e9bda7](https://github.com/lerna/lerna/commit/0e9bda769d944e3f0b9218ec1ecfaf63273baf11))
+* Add `--profile` option to `lerna exec` and `lerna run` ([#2376](https://github.com/lerna/lerna/issues/2376)) ([6290174](https://github.com/lerna/lerna/commit/62901748f818516d58efdfd955eacb447e270351))
+
+
+
+
+
 # [3.19.0](https://github.com/lerna/lerna/compare/v3.18.5...v3.19.0) (2019-11-20)
 
 

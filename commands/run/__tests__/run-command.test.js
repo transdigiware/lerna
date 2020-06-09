@@ -2,6 +2,9 @@
 
 jest.mock("@lerna/npm-run-script");
 
+const fs = require("fs-extra");
+const globby = require("globby");
+
 // mocked modules
 const npmRunScript = require("@lerna/npm-run-script");
 const output = require("@lerna/output");
@@ -161,6 +164,42 @@ describe("RunCommand", () => {
     });
   });
 
+  describe("with --profile", () => {
+    it("executes a profiled command in all packages", async () => {
+      const cwd = await initFixture("basic");
+
+      await lernaRun(cwd)("--profile", "my-script");
+
+      const [profileLocation] = await globby("Lerna-Profile-*.json", { cwd, absolute: true });
+      const json = await fs.readJson(profileLocation);
+
+      expect(json).toMatchObject([
+        {
+          name: "package-1",
+          ph: "X",
+          ts: expect.any(Number),
+          pid: 1,
+          tid: expect.any(Number),
+          dur: expect.any(Number),
+        },
+        {
+          name: "package-3",
+        },
+      ]);
+    });
+
+    it("accepts --profile-location", async () => {
+      const cwd = await initFixture("basic");
+
+      await lernaRun(cwd)("--profile", "--profile-location", "foo/bar", "my-script");
+
+      const [profileLocation] = await globby("foo/bar/Lerna-Profile-*.json", { cwd, absolute: true });
+      const exists = await fs.exists(profileLocation);
+
+      expect(exists).toBe(true);
+    });
+  });
+
   describe("with --no-sort", () => {
     it("runs scripts in lexical (not topological) order", async () => {
       const testDir = await initFixture("toposort");
@@ -170,7 +209,8 @@ describe("RunCommand", () => {
       expect(output.logged().split("\n")).toEqual([
         "package-cycle-1",
         "package-cycle-2",
-        "package-cycle-extraneous",
+        "package-cycle-extraneous-1",
+        "package-cycle-extraneous-2",
         "package-dag-1",
         "package-dag-2a",
         "package-dag-2b",
@@ -188,7 +228,8 @@ describe("RunCommand", () => {
         Array [
           "packages/package-cycle-1 npm run env (prefixed: true)",
           "packages/package-cycle-2 npm run env (prefixed: true)",
-          "packages/package-cycle-extraneous npm run env (prefixed: true)",
+          "packages/package-cycle-extraneous-1 npm run env (prefixed: true)",
+          "packages/package-cycle-extraneous-2 npm run env (prefixed: true)",
           "packages/package-dag-1 npm run env (prefixed: true)",
           "packages/package-dag-2a npm run env (prefixed: true)",
           "packages/package-dag-2b npm run env (prefixed: true)",
@@ -217,7 +258,8 @@ describe("RunCommand", () => {
         "package-cycle-1",
         "package-cycle-2",
         "package-dag-3",
-        "package-cycle-extraneous",
+        "package-cycle-extraneous-1",
+        "package-cycle-extraneous-2",
       ]);
     });
 
